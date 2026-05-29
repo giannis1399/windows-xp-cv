@@ -1,0 +1,54 @@
+{
+  "personal_info": {
+    "name": "YOUR NAME",
+    "title": "YOUR TITLE (e.g. Full Stack Developer)",
+    "avatar": "URL_TO_YOUR_AVATAR_OR_IMAGE",
+    "email": "your.email@example.com",
+    "phone": "+30 690 000 0000",
+    "location": "Your City, Country",
+    "github": "github.com/yourusername",
+    "linkedin": "linkedin.com/in/yourusername",
+    "website": "yourwebsite.com",
+    "about": "A short retro biography or professional summary describing yourself."
+  },
+  "experience": [
+    {
+      "role": "Job Role / Title",
+      "company": "Company Name",
+      "period": "Period (e.g. 2024 - Present)",
+      "description": "Short description of key achievements and tasks."
+    }
+  ],
+  "education": [
+    {
+      "degree": "Degree Title",
+      "institution": "University / School Name",
+      "period": "Period (e.g. 2017 - 2022)",
+      "specialization": "Specialization / Thesis details."
+    }
+  ],
+  "skills": {
+    "languages": ["Python", "JavaScript", "SQL"],
+    "frameworks": ["Flask", "FastAPI", "React.js"],
+    "tools": ["Docker", "Git", "PostgreSQL"]
+  },
+  "projects": [
+    {
+      "name": "Project Name",
+      "description": "Short description of what the project accomplishes.",
+      "tech": "Technologies used (e.g. Python, Flask, HTML)",
+      "link": "github.com/yourusername/project-repo"
+    }
+  ],
+  "publications": [
+    {
+      "title": "Publication / Research Title",
+      "link": "link-to-publication.com",
+      "description": "Short summary of the publication."
+    }
+  ],
+  "certifications": [
+    "Name of Certification - Issuer (Year)",
+    "Another Certification (Year)"
+  ]
+}

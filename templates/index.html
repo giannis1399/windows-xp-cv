@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ cv.personal_info.name }} - Windows XP CV</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Tahoma&family=Pixelify+Sans&family=MS+Sans+Serif&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div id="desktop">
+    <div class="desktop-icons">
+        <div class="desktop-icon" style="top: 20px; left: 20px;" onclick="openWindow('win-about')">
+            <img src="https://img.icons8.com/color/48/monitor--v1.png" alt="My Computer">
+            <span>My Computer</span>
+        </div>
+        <div class="desktop-icon" style="top: 110px; left: 20px;" onclick="openWindow('win-experience')">
+            <img src="https://img.icons8.com/color/48/opened-folder.png" alt="My Documents">
+            <span>My Documents</span>
+        </div>
+        <div class="desktop-icon" style="top: 200px; left: 20px;" onclick="openWindow('win-projects')">
+            <img src="https://img.icons8.com/color/48/internet-explorer.png" alt="Internet Explorer">
+            <span>Internet Explorer</span>
+        </div>
+        <div class="desktop-icon" style="top: 290px; left: 20px;" onclick="openWindow('win-skills')">
+            <img src="https://img.icons8.com/color/48/notepad.png" alt="Notepad">
+            <span>Skills.txt</span>
+        </div>
+        <div class="desktop-icon" style="top: 380px; left: 20px;" onclick="openWindow('win-certs')">
+            <img src="https://img.icons8.com/color/48/diploma.png" alt="Certifications">
+            <span>Certs.txt</span>
+        </div>
+        <div class="desktop-icon" style="top: 20px; left: 110px;" onclick="openWindow('win-pubs')">
+            <img src="https://img.icons8.com/color/48/news.png" alt="Publications">
+            <span>Pubs.txt</span>
+        </div>
+        <div class="desktop-icon" style="top: 110px; left: 110px;" onclick="openWindow('win-paint')">
+            <img src="https://img.icons8.com/color/48/paint-brush.png" alt="MS Paint">
+            <span>Paint.exe</span>
+        </div>
+        <div class="desktop-icon" style="top: 200px; left: 110px;" onclick="openWindow('win-wmp')">
+            <img src="https://img.icons8.com/color/48/play.png" alt="Windows Media Player">
+            <span>WMP.exe</span>
+        </div>
+        <div class="desktop-icon" style="top: 290px; left: 110px;" onclick="openWindow('win-guestbook')">
+            <img src="https://img.icons8.com/color/48/ms-outlook.png" alt="Outlook">
+            <span>Outlook</span>
+        </div>
+    </div>
+
+    <div id="win-about" class="window active-window" style="top: 50px; left: 220px; width: 450px;">
+        <div class="window-titlebar" onmousedown="dragStart(event, 'win-about')">
+            <div class="titlebar-info">
+                <img src="https://img.icons8.com/color/16/monitor--v1.png" alt="icon">
+                <span>My Computer - About Me</span>
+            </div>
+            <div class="titlebar-buttons">
+                <button class="win-btn minimize" onclick="minimizeWindow('win-about')">_</button>
+                <button class="win-btn maximize" onclick="toggleMaximize('win-about')">□</button>
+                <button class="win-btn close" onclick="closeWindow('win-about')">×</button>
+            </div>
+        </div>
+        <div class="window-menu">
+            <div class="menu-item">
+                <span><u>F</u>ile</span>
+                <div class="dropdown-menu">
+                    <div onclick="executeMenuCommand('open', 'win-about')">Open</div>
+                    <hr>
+                    <div onclick="executeMenuCommand('close', 'win-about')">Close</div>
+                </div>
+            </div>
+            <div class="menu-item">
+                <span><u>E</u>dit</span>
+                <div class="dropdown-menu">
+                    <div onclick="executeMenuCommand('copy', 'win-about')">Copy</div>
+                </div>
+            </div>
+            <div class="menu-item">
+                <span><u>V</u>iew</span>
+                <div class="dropdown-menu">
+                    <div onclick="executeMenuCommand('maximize', 'win-about')">Maximize</div>
+                    <div onclick="executeMenuCommand('refresh', 'win-about')">Refresh</div>
+                </div>
+            </div>
+            <div class="menu-item">
+                <span><u>H</u>elp</span>
+                <div class="dropdown-menu">
+                    <div onclick="executeMenuCommand('about', 'win-about')">About System</div>
+                </div>
+            </div>
+        </div>
+        <div class="window-content">
+            <div class="about-container">
+                <div class="profile-header">
+                    <img src="{{ cv.personal_info.avatar }}" alt="Avatar" class="xp-avatar">
+                    <div>
+                        <h2>{{ cv.personal_info.name }}</h2>
+                        <p class="xp-subtitle">{{ cv.personal_info.title }}</p>
+                    </div>
+                </div>
+                <hr class="xp-divider">
+                <div class="xp-section">
+                    <h3>System Description:</h3>
+                    <p>{{ cv.personal_info.about }}</p>
+                </div>
+                <div class="xp-sysinfo">
+                    <div class="sysinfo-row"><strong>Location:</strong> <span>{{ cv.personal_info.location }}</span></div>
+                    <div class="sysinfo-row"><strong>Email:</strong> <span>{{ cv.personal_info.email }}</span></div>
+                    <div class="sysinfo-row">
+                        <strong>Phone:</strong> 
+                        <span id="phone-field">
+                            <button onclick="revealPhone()" class="xp-form-btn" style="padding:2px 8px; font-size:10px; font-family: Tahoma, sans-serif;">Reveal Phone</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="window-statusbar">
+            <span>System Status: Fully Operational</span>
+            <span>1 Object(s)</span>
+        </div>
+    </div>
+
+    <div id="win-experience" class="window" style="top: 90px; left: 320px; width: 550px; display: none;">
+        <div class="window-titlebar" onmousedown="dragStart(event, 'win-experience')">
+            <div class="titlebar-info">
+                <img src="https://img.icons8.com/color/16/opened-folder.png" alt="icon">
+                <span>My Documents - Experience & Education</span>
+            </div>
+            <div class="titlebar-buttons">
+                <button class="win-btn minimize" onclick="minimizeWindow('win-experience')">_</button>
+                <button class="win-btn maximize" onclick="toggleMaximize('win-experience')">□</button>
+                <button class="win-btn close" onclick="closeWindow('win-experience')">×</button>
+            </div>
+        </div>
+        <div class="window-menu">
+            <div class="menu-item">
+                <span><u>F</u>ile</span>
+                <div class="dropdown-menu">
+                    <div onclick="executeMenuCommand('open', 'win-experience')">Open</div>
+                    <hr>
+                    <div onclick="executeMenuCommand('close', 'win-experience')">Close</div>
+                </div>
+            </div>
+            <div class="menu-item">
+                <span><u>E</u>dit</span>
+                <div class="dropdown-menu">
+                    <div onclick="executeMenuCommand('copy', 'win-experience')">Copy</div>
+                </div>
+            </div>
+            <div class="menu-item">
+                <span><u>V</u>iew</span>
+                <div class="dropdown-menu">
+                    <div onclick="executeMenuCommand('maximize', 'win-experience')">Maximize</div>
+                    <div onclick="executeMenuCommand('refresh', 'win-experience')">Refresh</div>
+                </div>
+            </div>
+            <div class="menu-item">
+                <span><u>H</u>elp</span>
+                <div class="dropdown-menu">
+                    <div onclick="executeMenuCommand('about', 'win-experience')">About Documents</div>
+                </div>
+            </div>
+        </div>
+        <div class="window-content">
+            <div class="docs-container">
+                <h3 class="section-title">📂 Professional Experience</h3>
+                {% for exp in cv.experience %}
+                <div class="cv-item">
+                    <div class="cv-header">
+                        <strong>{{ exp.role }}</strong> @ <span class="company">{{ exp.company }}</span>
+                        <span class="period">{{ exp.period }}</span>
+                    </div>
+                    <p class="cv-desc">{{ exp.description }}</p>
+                </div>
+                {% endfor %}
+
+                <h3 class="section-title">🎓 Education</h3>
+                {% for edu in cv.education %}
+                <div class="cv-item">
+                    <div class="cv-header">
+                        <strong>{{ edu.degree }}</strong>
+                        <span class="period">{{ edu.period }}</span>
+                    </div>
+                    <p class="cv-institution">{{ edu.institution }}</p>
+                    {% if edu.specialization %}
+                    <p class="cv-spec">Specialization: {{ edu.specialization }}</p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="window-statusbar">
+            <span>Documents Loaded Successfully</span>
+            <span>2 Category(s)</span>
+        </div>
+    </div>
+
+    <div id="win-skills" class="window" style="top: 150px; left: 260px; width: 400px; display: none;">
+        <div class="window-titlebar" onmousedown="dragStart(event, 'win-skills')">
+            <div class="titlebar-info">
+                <img src="https://img.icons8.com/color/16/notepad.png" alt="icon">
+                <span>Skills.txt - Notepad</span>
+            </div>
+            <div class="titlebar-buttons">
+                <button class="win-btn minimize" onclick="minimizeWindow('win-skills')">_</button>
+                <button class="win-btn maximize" onclick="toggleMaximize('win-skills')">□</button>
+                <button class="win-btn close" onclick="closeWindow('win-skills')">×</button>
+            </div>
+        </div>
+        <div class="window-menu">
+            <div class="menu-item">
+                <span><u>F</u>ile</span>
+                <div class="dropdown-menu">
+                    <div onclick="executeMenuCommand('open', 'win-skills')">Open</div>
+                    <hr>
+                    <div onclick="executeMenuCommand('close', 'win-skills')">Close</div>
+                </div>
+            </div>
+            <div class="menu-item">
+                <span><u>E</u>dit</span>
+                <div class="dropdown-menu">
+                    <div onclick="executeMenuCommand('copy', 'win-skills')">Copy</div>
+                </div>
+            </div>
+            <div class="menu-item">
+                <span><u>F</u>ormat</span>
+                <div class="dropdown-menu">
+                    <div onclick="alert('Word Wrap is Enabled')">Word Wrap</div>
+                </div>
+            </div>
+            <div class="menu-item">
+                <span><u>H</u>elp</span>
+                <div class="dropdown-menu">
+                    <div onclick="executeMenuCommand('about', 'win-skills')">About Notepad</div>
+                </div>
+            </div>
+        </div>
+        <div class="window-content notepad-content">
+            <textarea readonly>
+============================================
+           MY PROFESSIONAL SKILLS
+============================================
+
+[LANGUAGES & CORE]
+{% for lang in cv.skills.languages %}- {{ lang }}
+{% endfor %}
+[FRAMEWORKS & LIBRARIES]
+{% for fw in cv.skills.frameworks %}- {{ fw }}
+{% endfor %}
+[TOOLS & DATABASES]
+{% for tool in cv.skills.tools %}- {{ tool }}
+{% endfor %}
+============================================
+End of skills.txt
+            </textarea>
+        </div>
+        <div class="window-statusbar">
+            <span>Ln 1, Col 1</span>
+            <span>100%</span>
+        </div>
+    </div>
+
+    <div id="win-certs" class="window" style="top: 180px; left: 290px; width: 400px; display: none;">
+        <div class="window-titlebar" onmousedown="dragStart(event, 'win-certs')">
+            <div class="titlebar-info">
+                <img src="https://img.icons8.com/color/16/diploma.png" alt="icon">
+                <span>Certs.txt - Notepad</span>
+            </div>
+            <div class="titlebar-buttons">
+                <button class="win-btn minimize" onclick="minimizeWindow('win-certs')">_</button>
+                <button class="win-btn maximize" onclick="toggleMaximize('win-certs')">□</button>
+                <button class="win-btn close" onclick="closeWindow('win-certs')">×</button>
+            </div>
+        </div>
+        <div class="window-menu">
+            <div class="menu-item">
+                <span><u>F</u>ile</span>
+                <div class="dropdown-menu">
+                    <div onclick="executeMenuCommand('open', 'win-certs')">Open</div>
+                    <hr>
+                    <div onclick="executeMenuCommand('close', 'win-certs')">Close</div>
+                </div>
+            </div>
+            <div class="menu-item">
+                <span><u>E</u>dit</span>
+                <div class="dropdown-menu">
+                    <div onclick="executeMenuCommand('copy', 'win-certs')">Copy</div>
+                </div>
+            </div>
+            <div class="menu-item">
+                <span><u>F</u>ormat</span>
+                <div class="dropdown-menu">
+                    <div onclick="alert('Word Wrap is Enabled')">Word Wrap</div>
+                </div>
+            </div>
+            <div class="menu-item">
+                <span><u>H</u>elp</span>
+                <div class="dropdown-menu">
+                    <div onclick="executeMenuCommand('about', 'win-certs')">About Certs</div>
+                </div>
+            </div>
+        </div>
+        <div class="window-content notepad-content">
+            <textarea readonly>
+============================================
+            CERTIFICATIONS & AWARDS
+============================================
+{% for cert in cv.certifications %}
+- {{ cert }}
+{% endfor %}
+============================================
+End of certs.txt
+            </textarea>
+        </div>
+        <div class="window-statusbar">
+            <span>Ln 1, Col 1</span>
+            <span>100%</span>
+        </div>
+    </div>
+
+    <div id="win-pubs" class="window" style="top: 210px; left: 320px; width: 420px; display: none;">
+        <div class="window-titlebar" onmousedown="dragStart(event, 'win-pubs')">
+            <div class="titlebar-info">
+                <img src="https://img.icons8.com/color/16/news.png" alt="icon">
+                <span>Pubs.txt - Notepad</span>
+            </div>
+            <div class="titlebar-buttons">
+                <button class="win-btn minimize" onclick="minimizeWindow('win-pubs')">_</button>
+                <button class="win-btn maximize" onclick="toggleMaximize('win-pubs')">□</button>
+                <button class="win-btn close" onclick="closeWindow('win-pubs')">×</button>
+            </div>
+        </div>
+        <div class="window-menu">
+            <div class="menu-item">
+                <span><u>F</u>ile</span>
+                <div class="dropdown-menu">
+                    <div onclick="executeMenuCommand('open', 'win-pubs')">Open</div>
+                    <hr>
+                    <div onclick="executeMenuCommand('close', 'win-pubs')">Close</div>
+                </div>
+            </div>
+            <div class="menu-item">
+                <span><u>E</u>dit</span>
+                <div class="dropdown-menu">
+                    <div onclick="executeMenuCommand('copy', 'win-pubs')">Copy</div>
+                </div>
+            </div>
+            <div class="menu-item">
+                <span><u>F</u>ormat</span>
+                <div class="dropdown-menu">
+                    <div onclick="alert('Word Wrap is Enabled')">Word Wrap</div>
+                </div>
+            </div>
+            <div class="menu-item">
+                <span><u>H</u>elp</span>
+                <div class="dropdown-menu">
+                    <div onclick="executeMenuCommand('about', 'win-pubs')">About Pubs</div>
+                </div>
+            </div>
+        </div>
+        <div class="window-content notepad-content">
+            <textarea readonly>
+============================================
+                PUBLICATIONS
+============================================
+{% for pub in cv.publications %}
+Title: {{ pub.title }}
+Link: https://{{ pub.link }}
+
+Description:
+{{ pub.description }}
+--------------------------------------------
+{% endfor %}
+============================================
+End of pubs.txt
+            </textarea>
+        </div>
+        <div class="window-statusbar">
+            <span>Ln 1, Col 1</span>
+            <span>100%</span>
+        </div>
+    </div>
+
+    <div id="win-paint" class="window" style="top: 130px; left: 360px; width: 480px; display: none;">
+        <div class="window-titlebar" onmousedown="dragStart(event, 'win-paint')">
+            <div class="titlebar-info">
+                <img src="https://img.icons8.com/color/16/paint-brush.png" alt="icon">
+                <span>Paint.exe - MS Paint</span>
+            </div>
+            <div class="titlebar-buttons">
+                <button class="win-btn minimize" onclick="minimizeWindow('win-paint')">_</button>
+                <button class="win-btn maximize" onclick="toggleMaximize('win-paint')">□</button>
+                <button class="win-btn close" onclick="closeWindow('win-paint')">×</button>
+            </div>
+        </div>
+        <div class="window-menu">
+            <div class="menu-item">
+                <span><u>F</u>ile</span>
+                <div class="dropdown-menu">
+                    <div onclick="executeMenuCommand('open', 'win-paint')">New...</div>
+                    <hr>
+                    <div onclick="executeMenuCommand('close', 'win-paint')">Exit</div>
+                </div>
+            </div>
+            <div class="menu-item">
+                <span><u>E</u>dit</span>
+                <div class="dropdown-menu">
+                    <div onclick="clearPaintCanvas()">Clear Canvas</div>
+                </div>
+            </div>
+            <div class="menu-item">
+                <span><u>I</u>mage</span>
+                <div class="dropdown-menu">
+                    <div onclick="clearPaintCanvas()">Erase All</div>
+                </div>
+            </div>
+            <div class="menu-item">
+                <span><u>H</u>elp</span>
+                <div class="dropdown-menu">
+                    <div onclick="executeMenuCommand('about', 'win-paint')">About Paint</div>
+                </div>
+            </div>
+        </div>
+        <div class="window-content paint-window-content" style="padding:0; display:flex; flex-direction:column; overflow:hidden; height: 320px;">
+            <div class="paint-toolbar" style="background:#ece9d8; padding:5px; border-bottom:1px solid #d4d0c8; display:flex; gap:10px;">
+                <button onclick="clearPaintCanvas()" class="xp-form-btn" style="padding:2px 8px; font-size:11px;">Clear Screen</button>
+                <span style="font-size:11px; align-self:center; color:#555;">Color Palette:</span>
+            </div>
+            <div style="flex-grow:1; background:#808080; display:flex; justify-content:center; align-items:center; overflow:auto;">
+                <canvas id="paint-canvas" style="background:#fff; box-shadow:1px 1px 4px #000; cursor:crosshair;"></canvas>
+            </div>
+            <div class="paint-palette" style="background:#ece9d8; padding:5px; border-top:1px solid #d4d0c8; display:flex; gap:5px;">
+                <div style="width:15px; height:15px; background:#000000; border:1px solid #fff; cursor:pointer;" onclick="setPaintColor('#000000')"></div>
+                <div style="width:15px; height:15px; background:#ff0000; border:1px solid #fff; cursor:pointer;" onclick="setPaintColor('#ff0000')"></div>
+                <div style="width:15px; height:15px; background:#00ff00; border:1px solid #fff; cursor:pointer;" onclick="setPaintColor('#00ff00')"></div>
+                <div style="width:15px; height:15px; background:#0000ff; border:1px solid #fff; cursor:pointer;" onclick="setPaintColor('#0000ff')"></div>
+                <div style="width:15px; height:15px; background:#ffff00; border:1px solid #fff; cursor:pointer;" onclick="setPaintColor('#ffff00')"></div>
+                <div style="width:15px; height:15px; background:#ff00ff; border:1px solid #fff; cursor:pointer;" onclick="setPaintColor('#ff00ff')"></div>
+                <div style="width:15px; height:15px; background:#00ffff; border:1px solid #fff; cursor:pointer;" onclick="setPaintColor('#00ffff')"></div>
+                <div style="width:15px; height:15px; background:#ffffff; border:1px solid #808080; cursor:pointer;" onclick="setPaintColor('#ffffff')"></div>
+            </div>
+        </div>
+        <div class="window-statusbar">
+            <span>Ready</span>
+            <span>460x250 px</span>
+        </div>
+    </div>
+
+    <div id="win-wmp" class="window" style="top: 220px; left: 240px; width: 350px; display: none;">
+        <div class="window-titlebar" onmousedown="dragStart(event, 'win-wmp')">
+            <div class="titlebar-info">
+                <img src="https://img.icons8.com/color/16/play.png" alt="icon">
+                <span>Windows Media Player</span>
+            </div>
+            <div class="titlebar-buttons">
+                <button class="win-btn minimize" onclick="minimizeWindow('win-wmp')">_</button>
+                <button class="win-btn maximize" onclick="toggleMaximize('win-wmp')">□</button>
+                <button class="win-btn close" onclick="closeWindow('win-wmp')">×</button>
+            </div>
+        </div>
+        <div class="window-content wmp-content" style="background:#000022; color:#fff; display:flex; flex-direction:column; padding:10px; height: 180px;">
+            <div style="flex-grow:1; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+                <div style="font-size:24px; color:#00ffff; animation: pulse 1s infinite alternate;">🎵</div>
+                <div id="wmp-status-text" style="font-size:11px; margin-top:8px; color:#88ccff; font-family:'Courier New';">Status: Stopped</div>
+            </div>
+            <div style="height:4px; background:#333; margin:8px 0; border-radius:2px; overflow:hidden;">
+                <div id="wmp-progress-bar" style="height:100%; width:0%; background:#00ffcc; transition:width 0.2s;"></div>
+            </div>
+            <div style="display:flex; justify-content:center; gap:10px;">
+                <button id="wmp-play" onclick="toggleMediaPlayer()" class="xp-form-btn" style="width:40px; height:24px; font-weight:bold; font-size:10px;">▶</button>
+            </div>
+        </div>
+        <div class="window-statusbar" style="background:#0a246a; color:#fff; border-top:1px solid #1b47b4;">
+            <span>Media Player 9</span>
+            <span>Audio 2.0</span>
+        </div>
+    </div>
+
+    <div id="win-projects" class="window" style="top: 80px; left: 350px; width: 600px; display: none;">
+        <div class="window-titlebar" onmousedown="dragStart(event, 'win-projects')">
+            <div class="titlebar-info">
+                <img src="https://img.icons8.com/color/16/internet-explorer.png" alt="icon">
+                <span>Internet Explorer - Portfolio & Projects</span>
+            </div>
+            <div class="titlebar-buttons">
+                <button class="win-btn minimize" onclick="minimizeWindow('win-projects')">_</button>
+                <button class="win-btn maximize" onclick="toggleMaximize('win-projects')">□</button>
+                <button class="win-btn close" onclick="closeWindow('win-projects')">×</button>
+            </div>
+        </div>
+        <div class="ie-toolbar">
+            <div class="ie-addressbar">
+                <span>Address:</span>
+                <input type="text" value="http://{{ cv.personal_info.website }}/" readonly>
+                <button class="ie-go">Go</button>
+            </div>
+        </div>
+        <div class="window-content ie-webpage">
+            <div class="ie-welcome">
+                <h1>🌐 My Featured Projects</h1>
+                <p>Welcome to my portfolio! Here are some of my featured projects:</p>
+            </div>
+            <div class="ie-projects-grid">
+                {% for proj in cv.projects %}
+                <div class="ie-project-card">
+                    <h3>{{ proj.name }}</h3>
+                    <p class="proj-desc">{{ proj.description }}</p>
+                    <p class="proj-tech"><strong>Tech Stack:</strong> {{ proj.tech }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="window-statusbar">
+            <span>Done</span>
+            <span>Internet Zone</span>
+        </div>
+    </div>
+
+    <div id="win-guestbook" class="window" style="top: 240px; left: 360px; width: 500px; display: none;">
+        <div class="window-titlebar" onmousedown="dragStart(event, 'win-guestbook')">
+            <div class="titlebar-info">
+                <img src="https://img.icons8.com/color/16/ms-outlook.png" alt="icon">
+                <span>Outlook Express - New Message</span>
+            </div>
+            <div class="titlebar-buttons">
+                <button class="win-btn minimize" onclick="minimizeWindow('win-guestbook')">_</button>
+                <button class="win-btn maximize" onclick="toggleMaximize('win-guestbook')">□</button>
+                <button class="win-btn close" onclick="closeWindow('win-guestbook')">×</button>
+            </div>
+        </div>
+        <div class="window-menu">
+            <div class="menu-item">
+                <span><u>F</u>ile</span>
+                <div class="dropdown-menu">
+                    <div onclick="executeMenuCommand('close', 'win-guestbook')">Close</div>
+                </div>
+            </div>
+            <div class="menu-item">
+                <span><u>E</u>dit</span>
+                <div class="dropdown-menu">
+                    <div onclick="executeMenuCommand('copy', 'win-guestbook')">Copy</div>
+                </div>
+            </div>
+            <div class="menu-item">
+                <span><u>V</u>iew</span>
+                <div class="dropdown-menu">
+                    <div onclick="executeMenuCommand('maximize', 'win-guestbook')">Maximize</div>
+                </div>
+            </div>
+            <div class="menu-item">
+                <span><u>H</u>elp</span>
+                <div class="dropdown-menu">
+                    <div onclick="executeMenuCommand('about', 'win-guestbook')">About Outlook</div>
+                </div>
+            </div>
+        </div>
+        <div class="window-content email-composer-content" style="padding:0; display:flex; flex-direction:column; overflow:hidden; height:320px;">
+            <div style="background:#ece9d8; padding:8px; border-bottom:1px solid #d4d0c8; display:flex; flex-direction:column; gap:5px;">
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <span style="font-weight:bold; width:60px; color:#555; font-size:11px;">To:</span>
+                    <input type="text" value="{{ cv.personal_info.email }}" readonly style="flex-grow:1; padding:3px; background:#e0dfdf; border:1px solid #7f9db9; outline:none; font-family: Tahoma, sans-serif; font-size:11px; color:#444;">
+                </div>
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <span style="font-weight:bold; width:60px; color:#555; font-size:11px;">From:</span>
+                    <input type="email" id="email-from" required placeholder="your.email@example.com" style="flex-grow:1; padding:3px; border:1px solid #7f9db9; outline:none; font-family: Tahoma, sans-serif; font-size:11px;">
+                </div>
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <span style="font-weight:bold; width:60px; color:#555; font-size:11px;">Subject:</span>
+                    <input type="text" id="email-subject" required placeholder="Job Opportunity / Inquiry" style="flex-grow:1; padding:3px; border:1px solid #7f9db9; outline:none; font-family: Tahoma, sans-serif; font-size:11px;">
+                </div>
+            </div>
+            <div style="flex-grow:1; padding:10px; background:#fff; display:flex; flex-direction:column;">
+                <textarea id="email-body" required placeholder="Dear Ioannis,&#10;&#10;Write your message here..." style="width:100%; flex-grow:1; border:none; resize:none; outline:none; font-family: Tahoma, sans-serif; font-size:12px;"></textarea>
+            </div>
+            <div style="padding:6px 10px; background:#ece9d8; border-top:1px solid #d4d0c8; display:flex; justify-content:flex-end;">
+                <button onclick="sendEmailViaMailto(event)" class="xp-form-btn" style="display:flex; align-items:center; gap:5px; padding:4px 15px; font-size:11px; font-weight:bold;">
+                    <img src="https://img.icons8.com/color/16/sent.png" alt="send"> Send Message
+                </button>
+            </div>
+        </div>
+        <div class="window-statusbar">
+            <span id="guestbook-status">Ready to Send</span>
+            <span>Connected via POP3/SMTP</span>
+        </div>
+    </div>
+
+</div>
+
+<div id="taskbar">
+    <div id="start-btn" onclick="toggleStartMenu()">
+        <img src="https://img.icons8.com/color/24/windows-logo.png" alt="xp">
+        <span>start</span>
+    </div>
+    
+    <div class="taskbar-divider"></div>
+    
+    <div id="taskbar-tasks">
+    </div>
+    
+    <div id="system-tray">
+        <img src="https://img.icons8.com/color/16/globe.png" alt="net">
+        <img src="https://img.icons8.com/color/16/speaker.png" alt="vol">
+        <div id="clock">12:00 PM</div>
+    </div>
+</div>
+
+<div id="start-menu" style="display: none;">
+    <div class="start-header">
+        <img src="{{ cv.personal_info.avatar }}" alt="avatar" class="start-avatar">
+        <span class="start-username">{{ cv.personal_info.name }}</span>
+    </div>
+    <div class="start-body">
+        <div class="start-left">
+            <div class="start-item" onclick="openWindow('win-projects')">
+                <img src="https://img.icons8.com/color/32/internet-explorer.png" alt="ie">
+                <div class="start-item-text">
+                    <strong>Internet Explorer</strong>
+                    <span>My CV Portfolio</span>
+                </div>
+            </div>
+            <div class="start-item" onclick="openWindow('win-guestbook')">
+                <img src="https://img.icons8.com/color/32/ms-outlook.png" alt="outlook">
+                <div class="start-item-text">
+                    <strong>Outlook Express</strong>
+                    <span>Send an Email</span>
+                </div>
+            </div>
+            <div class="start-item" onclick="openWindow('win-paint')">
+                <img src="https://img.icons8.com/color/32/paint-brush.png" alt="paint">
+                <div class="start-item-text">
+                    <strong>MS Paint</strong>
+                    <span>Paint.exe</span>
+                </div>
+            </div>
+        </div>
+        <div class="start-right">
+            <div class="start-right-item" onclick="openWindow('win-about')">
+                <img src="https://img.icons8.com/color/24/monitor--v1.png" alt="computer">
+                <span>My Computer</span>
+            </div>
+            <div class="start-right-item" onclick="openWindow('win-experience')">
+                <img src="https://img.icons8.com/color/24/opened-folder.png" alt="docs">
+                <span>My Documents</span>
+            </div>
+            <div class="start-right-divider"></div>
+            <a href="https://{{ cv.personal_info.github }}" target="_blank" class="start-right-item no-underline">
+                <img src="https://img.icons8.com/nolan/24/github.png" alt="github">
+                <span>GitHub Profile</span>
+            </a>
+            <a href="https://{{ cv.personal_info.linkedin }}" target="_blank" class="start-right-item no-underline">
+                <img src="https://img.icons8.com/color/24/linkedin.png" alt="linkedin">
+                <span>LinkedIn Profile</span>
+            </a>
+        </div>
+    </div>
+    <div class="start-footer">
+        <div class="log-off-btn" onclick="showLogOffDialog()">
+            <img src="https://img.icons8.com/color/24/shutdown.png" alt="logoff">
+            <span>Log Off</span>
+        </div>
+        <div class="turn-off-btn" onclick="showTurnOffDialog()">
+            <img src="https://img.icons8.com/color/24/cancel.png" alt="turnoff">
+            <span>Turn Off</span>
+        </div>
+    </div>
+</div>
+
+<div id="welcome-screen">
+    <div class="welcome-left">
+        <img src="https://img.icons8.com/color/96/windows-logo.png" alt="logo">
+        <h2>Microsoft Windows<span>XP</span></h2>
+    </div>
+    <div class="welcome-divider"></div>
+    <div class="welcome-right">
+        <div class="welcome-user-card" onclick="loginUser()">
+            <img src="{{ cv.personal_info.avatar }}" alt="avatar">
+            <div class="welcome-user-info">
+                <h3>{{ cv.personal_info.name }}</h3>
+                <span>To log on, click your username</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="shutdown-overlay" style="display:none;">
+    <div class="shutdown-dialog">
+        <div class="shutdown-title">
+            <span>Turn off computer</span>
+            <img src="https://img.icons8.com/color/16/windows-logo.png" alt="logo">
+        </div>
+        <div class="shutdown-buttons">
+            <div class="shutdown-btn-container" onclick="shutdownAction('standby')">
+                <button class="shutdown-icon standby" style="border:none;">🕒</button>
+                <span>Standby</span>
+            </div>
+            <div class="shutdown-btn-container" onclick="shutdownAction('shutdown')">
+                <button class="shutdown-icon turnoff" style="border:none;">🔴</button>
+                <span>Turn Off</span>
+            </div>
+            <div class="shutdown-btn-container" onclick="shutdownAction('restart')">
+                <button class="shutdown-icon restart" style="border:none;">🟢</button>
+                <span>Restart</span>
+            </div>
+        </div>
+        <div class="shutdown-footer">
+            <button onclick="closeShutdownDialog()" class="xp-form-btn" style="font-size:11px; padding:3px 10px;">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<div id="safe-to-turnoff-screen" style="display:none;" onclick="wakeUpOrRestart()">
+    <div class="safe-text">
+        <p>It is now safe to turn off your computer.</p>
+        <span>Click anywhere to reboot the system.</span>
+    </div>
+</div>
+
+<div id="screensaver-overlay" style="display:none;" onclick="stopScreensaver()" onkeydown="stopScreensaver()">
+    <canvas id="screensaver-canvas"></canvas>
+</div>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
