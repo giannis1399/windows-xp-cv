@@ -573,7 +573,7 @@ End of pubs.txt
                 </div>
             </div>
             <div style="flex-grow:1; padding:10px; background:#fff; display:flex; flex-direction:column;">
-                <textarea id="email-body" required placeholder="Dear Ioannis,&#10;&#10;Write your message here..." style="width:100%; flex-grow:1; border:none; resize:none; outline:none; font-family: Tahoma, sans-serif; font-size:12px;"></textarea>
+                <textarea id="email-body" required placeholder="Dear {{ cv.personal_info.name }},&#10;&#10;Write your message here..." style="width:100%; flex-grow:1; border:none; resize:none; outline:none; font-family: Tahoma, sans-serif; font-size:12px;"></textarea>
             </div>
             <div style="padding:6px 10px; background:#ece9d8; border-top:1px solid #d4d0c8; display:flex; justify-content:flex-end;">
                 <button onclick="sendEmailViaMailto(event)" class="xp-form-btn" style="display:flex; align-items:center; gap:5px; padding:4px 15px; font-size:11px; font-weight:bold;">
