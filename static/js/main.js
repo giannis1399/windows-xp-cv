@@ -273,26 +273,53 @@ function initPaint() {
     paintCtx.fillStyle = '#ffffff';
     paintCtx.fillRect(0, 0, paintCanvas.width, paintCanvas.height);
     
-    paintCanvas.addEventListener('mousedown', function(e) {
-        isDrawing = true;
+    function getEventCoords(e) {
         const rect = paintCanvas.getBoundingClientRect();
+        let clientX, clientY;
+        if (e.touches && e.touches.length > 0) {
+            clientX = e.touches[0].clientX;
+            clientY = e.touches[0].clientY;
+        } else {
+            clientX = e.clientX;
+            clientY = e.clientY;
+        }
+        return {
+            x: clientX - rect.left,
+            y: clientY - rect.top
+        };
+    }
+
+    function startDrawing(e) {
+        isDrawing = true;
+        const coords = getEventCoords(e);
         paintCtx.beginPath();
-        paintCtx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+        paintCtx.moveTo(coords.x, coords.y);
         paintCtx.strokeStyle = drawColor;
         paintCtx.lineWidth = brushSize;
         paintCtx.lineCap = 'round';
-    });
-    
-    paintCanvas.addEventListener('mousemove', function(e) {
+        if (e.cancelable) e.preventDefault();
+    }
+
+    function draw(e) {
         if (!isDrawing) return;
-        const rect = paintCanvas.getBoundingClientRect();
-        paintCtx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+        const coords = getEventCoords(e);
+        paintCtx.lineTo(coords.x, coords.y);
         paintCtx.stroke();
-    });
-    
-    document.addEventListener('mouseup', function() {
+        if (e.cancelable) e.preventDefault();
+    }
+
+    function stopDrawing() {
         isDrawing = false;
-    });
+    }
+
+    paintCanvas.addEventListener('mousedown', startDrawing);
+    paintCanvas.addEventListener('mousemove', draw);
+    document.addEventListener('mouseup', stopDrawing);
+
+    paintCanvas.addEventListener('touchstart', startDrawing, { passive: false });
+    paintCanvas.addEventListener('touchmove', draw, { passive: false });
+    document.addEventListener('touchend', stopDrawing);
+    document.addEventListener('touchcancel', stopDrawing);
 }
 
 function setPaintColor(color) {

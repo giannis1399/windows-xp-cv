@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://img.icons8.com/color/48/windows-logo.png">
     <title>{{ cv.personal_info.name }} - Windows XP CV</title>
     
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
@@ -722,6 +723,9 @@ End of pubs.txt
     <canvas id="screensaver-canvas"></canvas>
 </div>
 
+<script>
+    window.cvWebsite = "{{ cv.personal_info.website }}";
+</script>
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>

@@ -2,6 +2,8 @@
 
 A highly polished, interactive, and nostalgia-inducing retro Windows XP desktop environment styled portfolio. Built using **Python (Flask)** on the backend and vanilla **HTML, CSS, and JavaScript** on the frontend. 
 
+![Windows XP CV Screenshot](static/images/screenshot.png)
+
 It dynamically loads all professional profile details (About me, experience, education, projects, skills, certifications, and publications) from a simple, easily editable JSON configuration file.
 
 ---
